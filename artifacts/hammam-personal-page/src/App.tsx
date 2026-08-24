@@ -247,11 +247,9 @@ function Home() {
               </div>
               <div className="reveal reveal-delay-3 mt-20 flex items-center gap-3 font-mono-custom text-[10px] uppercase tracking-[.14em] text-muted-foreground"><span className="size-2 rounded-full bg-accent" /> {t(copy.hero.availability, lang)}</div>
             </div>
-            <div className="relative flex min-h-[420px] items-end overflow-hidden bg-foreground px-5 pb-8 text-background sm:px-8 lg:min-h-0 lg:px-12 lg:pb-12">
-              <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'linear-gradient(hsl(var(--background) / .09) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--background) / .09) 1px, transparent 1px)', backgroundSize: '44px 44px' }} />
-              <div className="absolute right-10 top-12 size-44 rounded-full border border-accent/50 sm:right-20 sm:top-20 sm:size-64" />
-              <div className="absolute right-[5.7rem] top-[5.7rem] size-32 rounded-full border border-background/20 sm:right-[9.3rem] sm:top-[9.3rem] sm:size-48" />
-              <div className="absolute right-10 top-12 size-2 bg-accent sm:right-20 sm:top-20" />
+            <div className="relative flex min-h-[520px] items-end overflow-hidden bg-foreground px-5 pb-8 text-background sm:px-8 lg:min-h-0 lg:px-12 lg:pb-12">
+              <img src={`${import.meta.env.BASE_URL}hammam-portrait.jpeg`} alt={lang === 'en' ? 'Hammam Ali Omar Taha' : 'همام علي عمر طه'} className="absolute inset-0 size-full object-cover object-top opacity-90" />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/35 to-foreground/5" />
               <div className="relative z-10 w-full">
                 <div className="mb-9 flex items-start justify-between font-mono-custom text-[10px] uppercase tracking-[.14em] text-background/50"><span>HT / 2025</span><span>31°57′N<br />35°56′E</span></div>
                 <div className="border-t border-background/20 pt-5">
