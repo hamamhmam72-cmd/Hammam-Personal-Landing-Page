@@ -1,5 +1,4 @@
 import { useEffect, useState, type FormEvent } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -22,13 +21,6 @@ import {
   Sun,
   X,
 } from 'lucide-react';
-import { ErrorBoundary } from '@/components/error-boundary';
-import { Toaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import NotFound from '@/pages/not-found';
-import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
-
-const queryClient = new QueryClient();
 
 type Lang = 'en' | 'ar';
 type Localized = { en: string; ar: string };
@@ -351,17 +343,8 @@ function Home() {
   );
 }
 
-function Router() {
-  return <Switch><Route path="/" component={Home} /><Route component={NotFound} /></Switch>;
-}
-
-function RoutedErrorBoundary({ children }: { children: React.ReactNode }) {
-  const [location] = useLocation();
-  return <ErrorBoundary resetKey={location}>{children}</ErrorBoundary>;
-}
-
 function App() {
-  return <QueryClientProvider client={queryClient}><TooltipProvider><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}><RoutedErrorBoundary><Router /></RoutedErrorBoundary></WouterRouter><Toaster /></TooltipProvider></QueryClientProvider>;
+  return <Home />;
 }
 
 export default App;
