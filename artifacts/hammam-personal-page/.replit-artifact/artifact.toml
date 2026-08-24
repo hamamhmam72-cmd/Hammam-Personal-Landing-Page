@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Hammam Personal Landing Page"
+description = "A bilingual personal landing page for Hammam Ali Omar Taha, presenting software engineering, Norv.ai, web design, and digital growth services with direct contact and lead capture."
+version = "1.0.0"
+id = "artifacts/hammam-personal-page"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23538
+
+[services.development]
+run = "pnpm --filter @workspace/hammam-personal-page run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/hammam-personal-page", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/hammam-personal-page/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23538"
+BASE_PATH = "/"

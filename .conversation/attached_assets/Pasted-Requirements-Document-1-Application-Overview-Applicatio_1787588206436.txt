@@ -1,0 +1,123 @@
+Requirements Document
+1. Application Overview
+Application Name: Hammam Ali Omar Taha — Personal Landing Page
+Description: A single-page personal landing page served via a business card QR code link. It presents Hammam Ali Omar Taha's professional identity, services, flagship projects, and provides a lead capture form and quick contact links. The page supports Arabic/English bilingual toggle and Light/Dark theme toggle, built as a single self-contained HTML file using Tailwind CSS CDN and Vanilla JavaScript.
+2. Users and Use Cases
+Target Users: Business contacts, potential clients, recruiters, and collaborators who scan the QR code from a physical business card.
+Core Use Case: A visitor scans the QR code, lands on the page, learns about Hammam's expertise and services, views flagship projects, and either submits a lead capture form or uses quick contact links to initiate a conversation.
+3. Page Structure and Functional Description
+3.1 Page Structure (Single Page, Scroll-Based)
+Personal Landing Page
+├── Global Header / Navigation Bar
+├── Section 1: Hero
+├── Section 2: About Me
+├── Section 3: Services
+├── Section 4: Flagship Projects
+├── Section 5: Lead Capture Form
+├── Section 6: Quick Contact Links
+└── Footer
+3.2 Global Header / Navigation Bar
+Sticky top navigation bar.
+Displays the name "Hammam Ali Omar Taha" as a brand anchor.
+Contains two toggle controls:
+Theme Toggle: switches between Dark mode (default) and Light mode.
+Language Toggle: switches between English (default) and Arabic. When Arabic is active, text direction switches to RTL.
+Navigation anchor links to each section (Hero, About, Services, Projects, Contact).
+3.3 Section 1: Hero
+Full-viewport-height hero section.
+Displays:
+Name: Hammam Ali Omar Taha
+Titles (stacked or animated): Software Engineer / Web Developer & Designer / Founder of Norv.ai / Digital Growth & Promotions Expert
+A powerful hook headline communicating value proposition.
+Two primary CTA buttons:
+"Book a Growth Consultation" — scrolls to or links to the Lead Capture Form section.
+"Explore My Services" — scrolls to the Services section.
+Design uses Tech Green accents on a deep black background (dark mode default).
+3.4 Section 2: About Me
+Short bio paragraph:
+"Passionate about building intelligent AI-powered software solutions and helping businesses scale through innovative digital promotion and high-performance web development."
+Highlights dual expertise:
+Software Engineering track
+Digital Growth & Business Promotion track
+Visual layout separates or balances the two expertise areas.
+3.5 Section 3: Services
+Interactive services section presenting three service cards:
+Smart Web Development — high-performance, modern web solutions.
+Norv.ai Solutions — AI-powered intelligent software products.
+Growth & Promotion Strategies — digital growth and promotional expertise.
+Each card is interactive (hover/tap effect) and includes a brief description.
+Each card may include a CTA that scrolls to the Lead Capture Form.
+3.6 Section 4: Flagship Projects Showcase
+Showcases two projects:
+Norv.ai — described as an operational intelligence platform.
+IT-Bridge — described as an educational platform for IT and software engineering students.
+Each project entry includes:
+Project name
+Short description
+Visual card or highlight block with Tech Green accent.
+3.7 Section 5: Lead Capture Form
+Heading: "Get in Touch" or equivalent (bilingual).
+Form fields:
+Full Name (text input)
+Email Address (email input)
+Intent selector (dropdown or radio): Subscribe / Hire / Request Consultation
+Message (textarea)
+Submit button
+On submission, the form routes the data to hamamhmam72@gmail.com (via mailto or a client-side email dispatch mechanism).
+Basic client-side validation: required fields must not be empty, email format must be valid.
+3.8 Section 6: Quick Contact Links
+Displays the following contact links as tappable icons or buttons:
+WhatsApp: +962781764789
+Telegram: @Norv_ai
+Email: hamamhmam72@gmail.com
+LinkedIn: Hammam Alhawamdeh
+Each link opens the respective platform directly.
+3.9 Footer
+Minimal footer with name and copyright line.
+Optional: repeat theme/language toggles or back-to-top link.
+4. Business Rules and Logic
+4.1 Theme Toggle
+Default state: Dark mode (deep black background, Tech Green accents, light text).
+Light mode: light/white background, dark text, Tech Green accents retained.
+Theme preference is applied instantly on toggle without page reload.
+Color palette is strictly limited to: Gray, Deep Black, and Tech Green. No other accent colors.
+4.2 Language Toggle
+Default state: English (LTR layout).
+Arabic mode: all visible text switches to Arabic equivalents; page layout direction switches to RTL.
+Toggle applies instantly without page reload.
+Both language states must cover all sections including form labels, button text, and navigation.
+4.3 Lead Capture Form Routing
+Form submission must direct the captured data to hamamhmam72@gmail.com.
+Client-side validation runs before submission; invalid or empty required fields block submission and display inline error indicators.
+4.4 Single-File Delivery
+The entire page must be a single self-contained HTML file.
+Tailwind CSS loaded via CDN.
+No build step, no external dependencies beyond CDN links.
+Must be compatible with standalone static hosting (direct file open or simple static server).
+4.5 Mobile-First
+Layout and typography are designed for mobile viewports first, then scaled up for tablet and desktop.
+Page must load instantly to serve QR code scan traffic effectively.
+5. Exceptions and Edge Cases
+Scenario	Handling
+Form submitted with empty required fields	Block submission; show inline validation error per field
+Form submitted with invalid email format	Block submission; show email format error
+Language toggle on RTL (Arabic)	All layout containers flip to RTL; form inputs and navigation align accordingly
+Theme toggle in mid-scroll	Theme applies globally and immediately without scroll position reset
+Quick contact links on desktop	Links open respective apps or web versions (WhatsApp Web, Telegram Web, mail client, LinkedIn)
+6. Acceptance Criteria
+Open the single HTML file in a browser (or via static hosting URL from a QR code scan).
+The page loads in dark mode with English as the default language, displaying the Hero section with name, titles, hook headline, and two CTA buttons.
+Click "Explore My Services" — page scrolls to the Services section showing three interactive service cards.
+Click "Book a Growth Consultation" (or a service card CTA) — page scrolls to the Lead Capture Form.
+Fill in the form fields (name, email, intent, message) and submit — form validates inputs and routes submission to hamamhmam72@gmail.com.
+Click the Language Toggle — all page text switches to Arabic and layout direction changes to RTL.
+Click the Theme Toggle — page switches to Light mode; color palette updates accordingly.
+Tap a Quick Contact Link (e.g., WhatsApp +962781764789) — the respective platform opens.
+7. Out of Scope
+Backend server, database, or CMS integration.
+User accounts, login, or authentication.
+Analytics or tracking scripts.
+Blog or dynamic content management.
+Multi-page routing or SPA framework.
+Third-party form submission services (beyond mailto routing).
+Animations beyond hover/tap interaction effects on service cards.

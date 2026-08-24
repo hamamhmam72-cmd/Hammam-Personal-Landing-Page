@@ -1,0 +1,41 @@
+/internal-comms
+
+/canvas-design
+
+/frontend-design
+
+/web-artifacts-builder
+Act as a world-class UI/UX expert, professional Full-Stack developer, and Conversion Rate Optimization (CRO) expert.
+Write clean, well-structured, production-ready code (HTML, Tailwind CSS, JavaScript) for a single, interactive, high-end landing page. This page will be linked via a QR code on my business card to introduce me, showcase everything I do, and captivate prospective clients to subscribe, hire me, or contact me instantly.
+About Me & My Professional Identity:
+
+Name: Hammam Ali Omar Taha
+Professional Titles: Software Engineer, Web Developer & Designer, Founder of Norv.ai, and Digital Growth & Promotions Expert.
+Bio: Passionate about building intelligent, AI-powered software solutions and helping businesses scale and grow through innovative digital promotion strategies and high-performance web development.
+Key Projects & Services to Highlight:
+Norv.ai: An advanced operational intelligence platform and software solutions provider for businesses (focusing on smart operations and management).
+Web Engineering & Design: Building seamless, high-performance, full-stack web applications with an obsessive focus on UI/UX and user experience.
+Promotions & Growth Expert: Helping startups and businesses build smart digital promotion campaigns that acquire clients, drive engagement, and multiply profits.
+IT-Bridge: An intelligent educational platform designed to assist IT and software engineering students.
+Design & UX Requirements:
+Modern, sleek, dark-mode aesthetic with neon or tech-focused accents (e.g., deep blue or emerald) that feels premium and cutting-edge.
+Mobile-First architecture: Must load in a fraction of a second and look flawless on mobile devices, as clients will scan it directly from a physical business card.
+Page Structure:
+Hero Section: A powerful, punchy hook introducing who I am and what I offer, paired with a high-contrast Call-to-Action (CTA) like "Book a Growth Consultation" or "Explore My Services".
+Short, impactful "About Me" section highlighting my dual expertise in software engineering and business promotion.
+Interactive Services Section (Smart Web Development, Norv.ai Solutions, Growth & Promotion Strategies).
+Flagship Projects Showcase (Norv.ai & IT-Bridge).
+High-Conversion Lead Capture Section: A clean, frictionless form where potential clients can submit their details to subscribe, hire, or request an instant consultation.
+Quick Contact Links (Direct WhatsApp/Telegram, Email: hamamhmam72@gmail.com, social profiles).
+Provide the full, clean, copy-pasteable code ready to run immediately (compatible with environments like Replit or standalone HTML hosting).Act as an expert UI/UX developer and frontend engineer. Please update the interface and code based on the following strict requirements:
+Color Palette: Design a harmonious color scheme strictly using shades of Gray, Deep Black, and Tech Green (terminal/matrix green accents).
+Typography: Fix, optimize, and organize all fonts to ensure clean hierarchy, readability, and proper scaling.
+Content Removal: Completely remove any mention, command, or section related to "whoami".
+Bilingual Feature: Implement an Arabic/English language toggle/translation feature for the content.
+Theme Toggle: Add a fully functional Day/Night (Light/Dark) mode lighting switch.
+Contact & Social Integrations:
+Link LinkedIn to "Hammam Alhawamdeh".
+Route contact form/email messages to hamamhmam72@gmail.com.
+Link Telegram to Norv_ai.
+Add WhatsApp call integration to phone number +962 781764789.
+Provide the complete, clean, and production-ready code with these changes applied seamlessly
