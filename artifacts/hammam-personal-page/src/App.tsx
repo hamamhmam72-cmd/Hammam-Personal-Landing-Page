@@ -137,27 +137,27 @@ function Header({
   const jump = () => setOpen(false);
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-xl">
-      <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
+      <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-4 sm:px-8 lg:px-12">
         <a href="#top" className="group flex items-center gap-3" data-testid="link-brand">
           <span className="grid size-9 place-items-center bg-foreground font-display text-sm font-bold text-background transition-transform group-hover:rotate-[-8deg]">H</span>
           <span className="hidden font-mono-custom text-[10px] uppercase tracking-[.18em] text-muted-foreground sm:inline">Hammam / digital</span>
         </a>
         <nav className={`${open ? 'absolute left-4 right-4 top-[82px] flex' : 'hidden'} flex-col gap-1 rounded-2xl border border-border bg-card p-3 shadow-xl md:static md:flex md:flex-row md:items-center md:gap-7 md:border-0 md:bg-transparent md:p-0 md:shadow-none`} aria-label="Primary navigation">
-          {navItems.map((item) => (
-            <a key={item.href} href={item.href} onClick={jump} className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:px-0 md:py-1 md:hover:bg-transparent" data-testid={`link-nav-${item.href.slice(1)}`}>{item.label}</a>
+           {navItems.map((item) => (
+             <a key={item.href} href={item.href} onClick={jump} className="flex min-h-11 items-center rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:min-h-0 md:px-0 md:py-1 md:hover:bg-transparent" data-testid={`link-nav-${item.href.slice(1)}`}>{item.label}</a>
           ))}
           <a href="#contact" onClick={jump} className="mt-2 flex items-center justify-between gap-3 rounded-xl bg-foreground px-4 py-3 text-sm font-semibold text-background transition-transform hover:-translate-y-0.5 md:mt-0 md:justify-start md:rounded-none md:px-3 md:py-2" data-testid="link-nav-contact">
-            {t(copy.nav.contact, lang)} <ArrowUpRight size={15} aria-hidden="true" />
+             {t(copy.nav.contact, lang)} <ArrowUpRight size={15} aria-hidden="true" />
           </a>
         </nav>
         <div className="flex items-center gap-2">
-          <button type="button" onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="flex h-9 items-center gap-1 rounded-full border border-border px-3 font-mono-custom text-[10px] uppercase tracking-[.14em] transition-colors hover:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label={lang === 'en' ? 'Switch to Arabic' : 'Switch to English'} data-testid="button-language">
+             <button type="button" onClick={() => setLang(lang === 'en' ? 'ar' : 'en')} className="flex min-h-11 items-center gap-1 rounded-full border border-border px-3 font-mono-custom text-[10px] uppercase tracking-[.14em] transition-colors hover:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label={lang === 'en' ? 'Switch to Arabic' : 'Switch to English'} data-testid="button-language">
             <Globe2 size={14} aria-hidden="true" /> {lang === 'en' ? 'عربي' : 'EN'}
           </button>
-          <button type="button" onClick={() => setDark(!dark)} className="grid size-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label={dark ? 'Use day theme' : 'Use night theme'} data-testid="button-theme">
+           <button type="button" onClick={() => setDark(!dark)} className="grid size-11 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" aria-label={dark ? 'Use day theme' : 'Use night theme'} data-testid="button-theme">
             {dark ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
           </button>
-          <button type="button" onClick={() => setOpen(!open)} className="grid size-9 place-items-center rounded-full border border-border md:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} data-testid="button-menu">
+           <button type="button" onClick={() => setOpen(!open)} className="grid size-11 place-items-center rounded-full border border-border md:hidden" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} data-testid="button-menu">
             {open ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
@@ -230,18 +230,18 @@ function Home() {
       <main>
         <section className="relative overflow-hidden border-b border-border pt-[72px]" aria-labelledby="hero-title">
           <div className="mx-auto grid min-h-[calc(100dvh-72px)] max-w-[1440px] grid-cols-1 lg:grid-cols-[1.08fr_.92fr]">
-            <div className="relative flex flex-col justify-center px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+             <div className="relative flex min-w-0 flex-col justify-center px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
               <div className="absolute left-5 top-8 h-px w-20 bg-accent sm:left-8 lg:left-12" />
               <p className="reveal font-mono-custom text-[10px] uppercase tracking-[.17em] text-muted-foreground">{t(copy.hero.eyebrow, lang)}</p>
-              <h1 id="hero-title" className="reveal reveal-delay-1 mt-7 max-w-4xl font-display text-[clamp(3.35rem,9vw,8.8rem)] font-medium leading-[.91] tracking-[-.075em] text-balance">
+              <h1 id="hero-title" className="reveal reveal-delay-1 mt-7 max-w-4xl break-words font-display text-[clamp(2.9rem,9vw,8.8rem)] font-medium leading-[.91] tracking-[-.075em] text-balance">
                 {t(copy.hero.titleA, lang)}<br /><span className="text-muted-foreground">{t(copy.hero.titleB, lang)}</span>
               </h1>
               <p className="reveal reveal-delay-2 mt-8 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">{t(copy.hero.body, lang)}</p>
-              <div className="reveal reveal-delay-3 mt-10 flex flex-wrap items-center gap-3">
-                <a href="#contact" className="group inline-flex items-center gap-3 bg-accent px-5 py-3.5 text-sm font-bold text-accent-foreground transition-transform hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background" data-testid="link-hero-contact">
+               <div className="reveal reveal-delay-3 mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                 <a href="#contact" className="group inline-flex min-h-12 items-center justify-center gap-3 bg-accent px-5 py-3.5 text-sm font-bold text-accent-foreground transition-transform hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:justify-start" data-testid="link-hero-contact">
                   {t(copy.hero.cta, lang)} <ArrowUpRight size={17} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
                 </a>
-                <a href="#work" className="group inline-flex items-center gap-2 px-2 py-3.5 text-sm font-semibold underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" data-testid="link-hero-work">
+                 <a href="#work" className="group inline-flex min-h-12 items-center justify-center gap-2 px-2 py-3.5 text-sm font-semibold underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:justify-start" data-testid="link-hero-work">
                   {t(copy.hero.work, lang)} <ArrowDownRight size={16} aria-hidden="true" />
                 </a>
               </div>
@@ -290,7 +290,7 @@ function Home() {
             <div className="divide-y divide-border border-y border-border">
               {services.map((service, index) => {
                 const Icon = service.icon;
-                return <article key={service.number} className={`reveal reveal-delay-${Math.min(index + 1, 3)} group grid gap-5 py-7 sm:grid-cols-[.2fr_1fr_1.25fr_.8fr] sm:items-center sm:gap-8 sm:py-9`} data-testid={`card-service-${service.number}`}>
+                 return <article key={service.number} className={`reveal reveal-delay-${Math.min(index + 1, 3)} group grid min-w-0 gap-5 py-7 sm:grid-cols-[.2fr_1fr_1.25fr_.8fr] sm:items-center sm:gap-8 sm:py-9`} data-testid={`card-service-${service.number}`}>
                   <span className="font-mono-custom text-xs text-muted-foreground">{service.number}</span>
                   <div className="flex items-center gap-4"><span className="grid size-11 shrink-0 place-items-center border border-border bg-card transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground"><Icon size={19} /></span><h3 className="font-display text-xl tracking-[-.03em] sm:text-2xl">{t(service.title, lang)}</h3></div>
                   <p className="max-w-md text-sm leading-6 text-muted-foreground">{t(service.text, lang)}</p>
@@ -304,12 +304,12 @@ function Home() {
         <section id="work" className="mx-auto max-w-[1440px] scroll-mt-20 px-5 py-24 sm:px-8 lg:px-12 lg:py-36" aria-labelledby="work-title">
           <div className="mb-14 grid gap-6 lg:grid-cols-[.38fr_1fr]"><p className="reveal font-mono-custom text-[10px] uppercase tracking-[.17em] text-muted-foreground">{t(copy.work.kicker, lang)}</p><div className="reveal reveal-delay-1"><h2 id="work-title" className="font-display text-4xl tracking-[-.055em] sm:text-6xl">{t(copy.work.title, lang)}</h2><p className="mt-5 text-muted-foreground">{t(copy.work.intro, lang)}</p></div></div>
           <div className="grid gap-5 lg:grid-cols-[1.4fr_.85fr]">
-            <a href="https://norvapp.com/" target="_blank" rel="noreferrer" className="reveal group relative min-h-[390px] overflow-hidden bg-foreground p-6 text-background sm:min-h-[500px] sm:p-10" data-testid="link-project-norv">
+             <a href="https://norvapp.com/" target="_blank" rel="noreferrer" className="reveal group relative min-h-[360px] min-w-0 overflow-hidden bg-foreground p-5 text-background sm:min-h-[500px] sm:p-10" data-testid="link-project-norv">
               <img src={`${import.meta.env.BASE_URL}norv-dashboard.png`} alt={lang === 'en' ? 'Norv AI operational dashboard' : 'لوحة تحكم Norv للذكاء الاصطناعي'} className="absolute inset-0 size-full object-cover object-center opacity-55 transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/55 to-foreground/10" />
               <div className="relative flex h-full flex-col justify-between"><div className="flex items-start justify-between"><span className="border border-background/30 px-3 py-1.5 font-mono-custom text-[10px] uppercase tracking-[.15em] text-background/65">Flagship / 01</span><ExternalLink size={20} className="text-accent transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" /></div><div><p className="font-mono-custom text-[10px] uppercase tracking-[.15em] text-accent">Norv.ai</p><h3 className="mt-3 max-w-lg font-display text-5xl tracking-[-.07em] sm:text-7xl">Useful intelligence.</h3><p className="mt-5 max-w-md text-sm leading-6 text-background/60">{lang === 'en' ? 'A practical AI solutions studio for teams that want less friction and more forward motion.' : 'استوديو لحلول الذكاء الاصطناعي العملية للفرق التي تريد تعقيداً أقل وتقدماً أكثر.'}</p></div></div>
             </a>
-            <a href="https://wa.me/962781764789" target="_blank" rel="noreferrer" className="reveal reveal-delay-1 group flex min-h-[390px] flex-col justify-between border border-border bg-card p-6 sm:min-h-[500px] sm:p-8" data-testid="link-project-whatsapp">
+             <a href="https://wa.me/962781764789" target="_blank" rel="noreferrer" className="reveal reveal-delay-1 group flex min-h-[360px] min-w-0 flex-col justify-between border border-border bg-card p-5 sm:min-h-[500px] sm:p-8" data-testid="link-project-whatsapp">
               <div className="flex items-start justify-between"><span className="border border-border px-3 py-1.5 font-mono-custom text-[10px] uppercase tracking-[.15em] text-muted-foreground">{lang === 'en' ? 'Let’s connect / 02' : 'لنتواصل / 02'}</span><MessageCircle size={20} className="text-accent transition-transform group-hover:scale-110" /></div>
               <div><div className="mb-7 grid size-24 place-items-center border border-accent/60 text-accent"><MessageCircle size={38} strokeWidth={1.5} /></div><p className="font-mono-custom text-[10px] uppercase tracking-[.15em] text-accent">WhatsApp</p><h3 className="mt-2 font-display text-4xl tracking-[-.06em] sm:text-5xl">{lang === 'en' ? 'Let’s talk.' : 'لنتحدث.'}</h3><p className="mt-4 max-w-sm text-sm leading-6 text-muted-foreground">{lang === 'en' ? 'Have an idea, a project, or a question? Send me a message directly on WhatsApp.' : 'لديك فكرة أو مشروع أو سؤال؟ أرسل لي رسالة مباشرة عبر واتساب.'}</p></div>
             </a>
@@ -326,7 +326,7 @@ function Home() {
               <label className="mt-8 block"><span className="mb-2 block font-mono-custom text-[10px] uppercase tracking-[.15em] text-background/55">{t(copy.contact.project, lang)}</span><textarea name="project" required rows={4} className="w-full resize-none border-b border-background/25 bg-transparent px-0 py-3 text-lg leading-7 outline-none transition-colors placeholder:text-background/30 focus:border-accent" placeholder={lang === 'en' ? 'A new site, an AI idea, a growth problem…' : 'موقع جديد، فكرة للذكاء الاصطناعي، تحدٍ في النمو…'} data-testid="input-project" /></label>
               {formError && <p className="mt-5 text-sm text-accent" role="alert" data-testid="status-form-error">{t(copy.contact.error, lang)}</p>}
               {sent && <p className="mt-5 flex items-center gap-2 text-sm text-accent" role="status" data-testid="status-form-success"><CheckCircle2 size={16} /> {t(copy.contact.success, lang)}</p>}
-              <button type="submit" className="group mt-9 inline-flex items-center gap-3 bg-accent px-5 py-3.5 text-sm font-bold text-accent-foreground transition-transform hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-foreground" data-testid="button-submit-brief">{t(copy.contact.send, lang)} <ArrowUpRight size={17} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></button>
+             <button type="submit" className="group mt-9 inline-flex min-h-12 w-full items-center justify-center gap-3 bg-accent px-5 py-3.5 text-sm font-bold text-accent-foreground transition-transform hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-foreground sm:w-auto" data-testid="button-submit-brief">{t(copy.contact.send, lang)} <ArrowUpRight size={17} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></button>
             </form>
           </div>
         </section>
