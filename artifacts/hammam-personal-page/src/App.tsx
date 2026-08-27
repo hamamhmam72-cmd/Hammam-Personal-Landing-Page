@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react';
+import QRCode from 'qrcode';
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -7,7 +8,9 @@ import {
   ChevronDown,
   Code2,
   Copy,
+  Download,
   ExternalLink,
+  Github,
   Globe2,
   LineChart,
   Linkedin,
@@ -16,9 +19,11 @@ import {
   MessageCircle,
   Moon,
   Phone,
+  QrCode,
   Rocket,
   Send,
   Sun,
+  UserRoundPlus,
   X,
 } from 'lucide-react';
 
@@ -58,8 +63,26 @@ const copy = {
     title: { en: 'Built to be useful.', ar: 'صُممت لتكون مفيدة.' },
     intro: { en: 'A couple of ideas I’ve taken from a blank page into the world.', ar: 'بعض الأفكار التي نقلتها من صفحة بيضاء إلى العالم.' },
   },
+  connect: {
+    kicker: { en: '04 / Keep in touch', ar: '٠٤ / ابقَ على تواصل' },
+    title: { en: 'One scan. Every way to connect.', ar: 'مسح واحد. وكل طرق التواصل.' },
+    intro: { en: 'Save the QR for later, add my details to your contacts, or choose the fastest way to reach me now.', ar: 'احفظ رمز QR لوقت لاحق، أو أضف بياناتي إلى جهات الاتصال، أو اختر أسرع طريقة للتواصل الآن.' },
+    qrLabel: { en: 'Scan to visit my website', ar: 'امسح لزيارة موقعي' },
+    live: { en: 'Live personal website', ar: 'الموقع الشخصي المباشر' },
+    qrLoading: { en: 'Preparing QR…', ar: 'جارٍ تجهيز رمز QR…' },
+    qrUnavailable: { en: 'QR unavailable', ar: 'رمز QR غير متاح حالياً' },
+    download: { en: 'Download QR code', ar: 'تنزيل رمز QR' },
+    vcard: { en: 'Save contact card', ar: 'حفظ بطاقة التواصل' },
+    actions: { en: 'Quick links', ar: 'روابط سريعة' },
+    call: { en: 'Call me', ar: 'اتصل بي' },
+    whatsapp: { en: 'WhatsApp', ar: 'واتساب' },
+    email: { en: 'Email me', ar: 'راسلني بالبريد' },
+    norv: { en: 'Visit Norv.ai', ar: 'زيارة Norv.ai' },
+    linkedin: { en: 'LinkedIn', ar: 'لينكدإن' },
+    github: { en: 'GitHub', ar: 'غيت هب' },
+  },
   contact: {
-    kicker: { en: '04 / Your next move', ar: '٠٤ / خطوتك التالية' },
+    kicker: { en: '05 / Your next move', ar: '٠٥ / خطوتك التالية' },
     title: { en: 'Have something worth building?', ar: 'لديك شيء يستحق البناء؟' },
     intro: { en: 'Tell me the useful version. I’ll reply with a clear point of view and a practical next step.', ar: 'أخبرني عن النسخة المفيدة من فكرتك. سأرد برؤية واضحة وخطوة عملية تالية.' },
     name: { en: 'Your name', ar: 'اسمك' },
@@ -104,6 +127,11 @@ const services = [
 function t(value: Localized, lang: Lang) {
   return value[lang];
 }
+
+const LIVE_SITE_URL = 'https://hammam-personal-landing-page.replit.app';
+const PHONE_NUMBER = '+962781764789';
+const DISPLAY_PHONE_NUMBER = '+962 78 176 4789';
+const EMAIL_ADDRESS = 'hamamhmam72@gmail.com';
 
 function useReveal() {
   useEffect(() => {
@@ -184,6 +212,8 @@ function Home() {
   const [sent, setSent] = useState(false);
   const [formError, setFormError] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [qrCodeUrl, setQrCodeUrl] = useState('');
+  const [qrCodeError, setQrCodeError] = useState(false);
   useReveal();
 
   useEffect(() => {
@@ -193,6 +223,30 @@ function Home() {
     localStorage.setItem('hammam-theme', dark ? 'dark' : 'light');
     localStorage.setItem('hammam-lang', lang);
   }, [dark, lang]);
+
+  useEffect(() => {
+    let active = true;
+
+    QRCode.toDataURL(LIVE_SITE_URL, {
+      errorCorrectionLevel: 'H',
+      margin: 2,
+      width: 720,
+      color: {
+        dark: '#111917',
+        light: '#ffffff',
+      },
+    })
+      .then((url) => {
+        if (active) setQrCodeUrl(url);
+      })
+      .catch(() => {
+        if (active) setQrCodeError(true);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const sendBrief = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -216,13 +270,59 @@ function Home() {
 
   const copyPhone = async () => {
     try {
-      await navigator.clipboard.writeText('+962 78 176 4789');
+      await navigator.clipboard.writeText(DISPLAY_PHONE_NUMBER);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
       setCopied(false);
     }
   };
+
+  const downloadQrCode = () => {
+    if (!qrCodeUrl) return;
+    const link = document.createElement('a');
+    link.href = qrCodeUrl;
+    link.download = 'hammam-personal-website-qr.png';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
+
+  const downloadVCard = () => {
+    const vCard = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      'N:Taha;Hammam Ali Omar;;;',
+      'FN:Hammam Ali Omar Taha',
+      'ORG:Norv.ai',
+      'TITLE:Software Engineer & Founder',
+      `TEL;TYPE=CELL,VOICE:${PHONE_NUMBER}`,
+      `EMAIL;TYPE=INTERNET:${EMAIL_ADDRESS}`,
+      `URL;TYPE=WORK:${LIVE_SITE_URL}`,
+      'URL;TYPE=WORK:https://norvapp.com/auth/login',
+      'URL;TYPE=LinkedIn:https://www.linkedin.com/in/hammam-alhawamdeh',
+      'URL;TYPE=GitHub:https://github.com/hamamhmam72-cmd',
+      'END:VCARD',
+      '',
+    ].join('\r\n');
+    const link = document.createElement('a');
+    const objectUrl = URL.createObjectURL(new Blob([vCard], { type: 'text/vcard;charset=utf-8' }));
+    link.href = objectUrl;
+    link.download = 'hammam-ali-omar-taha.vcf';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 0);
+  };
+
+  const quickLinks = [
+    { href: `tel:${PHONE_NUMBER}`, icon: Phone, label: t(copy.connect.call, lang), value: DISPLAY_PHONE_NUMBER, external: false },
+    { href: `https://wa.me/${PHONE_NUMBER.slice(1)}`, icon: MessageCircle, label: t(copy.connect.whatsapp, lang), value: '@Hammam', external: true },
+    { href: `mailto:${EMAIL_ADDRESS}`, icon: Mail, label: t(copy.connect.email, lang), value: EMAIL_ADDRESS, external: false },
+    { href: 'https://norvapp.com/auth/login', icon: ExternalLink, label: t(copy.connect.norv, lang), value: 'norvapp.com', external: true },
+    { href: 'https://www.linkedin.com/in/hammam-alhawamdeh', icon: Linkedin, label: t(copy.connect.linkedin, lang), value: 'Hammam Alhawamdeh', external: true },
+    { href: 'https://github.com/hamamhmam72-cmd', icon: Github, label: t(copy.connect.github, lang), value: '@hamamhmam72-cmd', external: true },
+  ];
 
   return (
     <div id="top" className="noise min-h-[100dvh] bg-background">
@@ -267,6 +367,43 @@ function Home() {
             {Array.from({ length: 2 }).map((_, group) => <div className="flex items-center gap-10" key={group}><span>Web development</span><span className="text-accent">+</span><span>Applied AI</span><span className="text-accent">+</span><span>Digital growth</span><span className="text-accent">+</span><span>Amman to everywhere</span><span className="text-accent">+</span></div>)}
           </div>
         </div>
+
+        <section id="connect" className="relative overflow-hidden border-b border-border bg-secondary/45" aria-labelledby="connect-title">
+          <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:radial-gradient(hsl(var(--accent)/.45)_1px,transparent_1px)] [background-size:24px_24px]" />
+          <div className="relative mx-auto max-w-[1440px] px-5 py-24 sm:px-8 lg:px-12 lg:py-32">
+            <div className="mb-12 grid gap-6 lg:grid-cols-[.38fr_1fr]">
+              <p className="reveal font-mono-custom text-[10px] uppercase tracking-[.17em] text-muted-foreground">{t(copy.connect.kicker, lang)}</p>
+              <div className="reveal reveal-delay-1">
+                <h2 id="connect-title" className="max-w-3xl font-display text-4xl tracking-[-.055em] sm:text-6xl">{t(copy.connect.title, lang)}</h2>
+                <p className="mt-5 max-w-2xl leading-7 text-muted-foreground">{t(copy.connect.intro, lang)}</p>
+              </div>
+            </div>
+            <div className="grid gap-5 lg:grid-cols-[.82fr_1.18fr]">
+              <article className="reveal rounded-[1.5rem] border border-border/80 bg-card/70 p-5 shadow-[0_20px_60px_hsl(var(--foreground)/.08)] backdrop-blur-xl sm:p-8">
+                <div className="flex items-center gap-3 font-mono-custom text-[10px] uppercase tracking-[.15em] text-muted-foreground"><QrCode size={15} className="text-accent" aria-hidden="true" /> {t(copy.connect.qrLabel, lang)}</div>
+                <div className="mx-auto mt-6 aspect-square w-full max-w-[280px] rounded-2xl border border-border bg-white p-3 shadow-sm">
+                  {qrCodeUrl ? <img src={qrCodeUrl} alt={t(copy.connect.qrLabel, lang)} className="size-full rounded-lg object-contain" /> : <div className="grid size-full place-items-center rounded-lg bg-muted px-4 text-center text-sm text-muted-foreground">{t(qrCodeError ? copy.connect.qrUnavailable : copy.connect.qrLoading, lang)}</div>}
+                </div>
+                <p className="mt-5 text-center font-mono-custom text-[10px] uppercase tracking-[.12em] text-muted-foreground">{t(copy.connect.live, lang)}</p>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  <button type="button" onClick={downloadQrCode} disabled={!qrCodeUrl} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-foreground px-4 text-sm font-semibold text-background transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card" data-testid="button-download-qr"><Download size={17} aria-hidden="true" /> {t(copy.connect.download, lang)}</button>
+                  <button type="button" onClick={downloadVCard} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-background/50 px-4 text-sm font-semibold transition-colors hover:border-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-card" data-testid="button-download-vcard"><UserRoundPlus size={17} aria-hidden="true" /> {t(copy.connect.vcard, lang)}</button>
+                </div>
+              </article>
+              <div className="reveal reveal-delay-1 rounded-[1.5rem] border border-border/80 bg-card/70 p-5 shadow-[0_20px_60px_hsl(var(--foreground)/.08)] backdrop-blur-xl sm:p-8">
+                <div className="flex items-center gap-3 font-mono-custom text-[10px] uppercase tracking-[.15em] text-muted-foreground"><ArrowUpRight size={15} className="text-accent" aria-hidden="true" /> {t(copy.connect.actions, lang)}</div>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {quickLinks.map(({ href, icon: Icon, label, value, external }) => (
+                    <a key={label} href={href} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined} className="group flex min-h-20 min-w-0 items-center gap-3 rounded-xl border border-border bg-background/55 p-4 transition-all hover:-translate-y-0.5 hover:border-accent hover:bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" data-testid={`link-quick-${label.toLowerCase().replaceAll(' ', '-')}`}>
+                      <span className="grid size-10 shrink-0 place-items-center rounded-full border border-border text-accent transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-accent-foreground"><Icon size={18} aria-hidden="true" /></span>
+                      <span className="min-w-0"><span className="block text-sm font-semibold">{label}</span><span className="block truncate pt-0.5 text-xs text-muted-foreground">{value}</span></span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section id="about" className="mx-auto max-w-[1440px] scroll-mt-20 px-5 py-24 sm:px-8 lg:px-12 lg:py-36">
           <div className="grid gap-12 lg:grid-cols-[.38fr_1fr_.55fr] lg:gap-16">
